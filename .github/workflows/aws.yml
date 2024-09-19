@@ -35,7 +35,6 @@ env:
   ECR_REPOSITORY: frontend
   ECS_SERVICE: frontend-cluster-service
   ECS_CLUSTER: frontend-cluster
-  ECS_TASK_DEFINITION: frontend-def
   CONTAINER_NAME: frontend
 
 permissions:
@@ -78,7 +77,7 @@ jobs:
     - name: Retrieve most recent ECS task definition JSON file
       id: retrieve-task-def
       run: |
-        aws ecs describe-task-definition --task-definition private-user-task --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition frontend-def --query taskDefinition > task-definition.json
         cat task-definition.json
         echo "::set-output name=task-def-file::task-definition.json"
     
