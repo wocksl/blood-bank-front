@@ -19,7 +19,7 @@ env:
 permissions:
   contents: read
   security-events: write  # SARIF 파일 업로드 권한
-  
+
 jobs:
   deploy:
     name: Deploy
@@ -109,7 +109,7 @@ jobs:
       with:
         task-definition: ${{ steps.retrieve-task-def.outputs.task-def-file }}
         container-name: ${{ env.CONTAINER_NAME }}
-        image: ${{ steps.build-image.outputs.image }}
+        image: ${{ steps.push-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
