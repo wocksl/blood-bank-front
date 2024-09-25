@@ -28,7 +28,12 @@ const UserRegister = () => {
       userUserName: userUserName,
       userPassword: userPassword,
     }).then((response) => {
-      alert(response.data.message);
+      if (response.data.message) {
+        alert(response.data.message);
+      } else {
+        alert("WELCOME!");
+        window.location = "/login/usr";
+      }
     });
   };
 
