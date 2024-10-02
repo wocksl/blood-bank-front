@@ -129,3 +129,12 @@ jobs:
         codedeploy-appspec: appspec.yaml
         codedeploy-application: AppECS-frontend-cluster-frontend-cluster-service
         codedeploy-deployment-group: DgpECS-frontend-cluster-frontend-cluster-service
+
+    - name: Send Slack Message
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        fields: repo,message,commit,author,eventName,workflow
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEB_HOOK_URL }} # required
+      if: always() # Pick up events even if the job fails or is canceled.
